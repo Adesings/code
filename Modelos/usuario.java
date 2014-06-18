@@ -22,7 +22,7 @@ public class usuario {
     direccion=null;
     telefono=null;
 }
-    public usuario(String nombre,String apellidoPaterno,String apellidoMaterno,String direccion,String telefono){
+    public usuario (String nombre,String apellidoPaterno,String apellidoMaterno,String direccion,String telefono){
         
         this.nombre=nombre;
         this.apellidoPaterno=apellidoPaterno;
