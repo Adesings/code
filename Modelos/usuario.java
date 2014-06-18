@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Modelos;
 
 /**
@@ -12,61 +6,31 @@ package Modelos;
  */
 public class usuario {
     
-    private String nombre,apellidoPaterno,apellidoMaterno,direccion,telefono;
+    private String nombreUsuario,password;
     
 
     public usuario (){
-    nombre=null;
-    apellidoPaterno=null;
-    apellidoMaterno=null;
-    direccion=null;
-    telefono=null;
+    nombreUsuario=null;
+    password=null;
+    
 }
-    public usuario (String nombre,String apellidoPaterno,String apellidoMaterno,String direccion,String telefono){
-        
-        this.nombre=nombre;
-        this.apellidoPaterno=apellidoPaterno;
-        this.apellidoMaterno=apellidoMaterno;
-        this.direccion=direccion;
-        this.telefono=telefono;
-        
+    public usuario (String nombreUsuario,String password){        
+        this.nombreUsuario=nombreUsuario;
+        this.password=password;    
     }
     
-    public void setNombre (String nombre){
-        this.nombre=nombre;
+    public void setNombreUsuario (String nombreUsuario){
+        this.nombreUsuario=nombreUsuario;
     }
-    public void setApellidoPaterno(String apellidoPaterno){
-        this.apellidoPaterno=apellidoPaterno;
+    public void setPassword (String Password){
+        this.password= password;
     }
-    public void setApellidoMaterno(String apellidoMaterno){
-        this.apellidoMaterno=apellidoMaterno;
+  
+    public String getNombreUsuario (){
+        return nombreUsuario;
     }
-    public void setDireccion(String direccion){
-        this.direccion=direccion;
+    public String getPassword(){
+        return password;
     }
-    public void setTelefono(String telefono){
-        this.telefono=telefono;
-    }
-    
-    public String getNombre (){
-        return nombre;
-    }
-    public String getApellidoPaterno (){
-        return apellidoPaterno;
-    }
-    public String getApellidoMaterno (){
-        return apellidoMaterno;
-    }
-    public String getDireccion (){
-        return direccion;
-    }
-    public String getTelefono (){
-        return telefono;
-    }
-    
-    
-    
-    
-    
-    
+   
 }
