@@ -36,14 +36,19 @@ public class Inicio extends javax.swing.JFrame {
 
         registraUsuario.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         registraUsuario.setText("Registrar usuario");
-        registraUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registraUsuarioActionPerformed(evt);
+        registraUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registraUsuarioMouseClicked(evt);
             }
         });
 
         iniciarSesion.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         iniciarSesion.setText("Iniciar sesión");
+        iniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                iniciarSesionMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,9 +81,19 @@ public class Inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void registraUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registraUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registraUsuarioActionPerformed
+    private void iniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarSesionMouseClicked
+        
+        IniciarSesion IS = new IniciarSesion();
+        IS.setVisible(true);
+        dispose();
+        
+    }//GEN-LAST:event_iniciarSesionMouseClicked
+
+    private void registraUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registraUsuarioMouseClicked
+        IniciarSesionAdmin IniS = new IniciarSesionAdmin();
+        IniS.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_registraUsuarioMouseClicked
 
     /**
      * @param args the command line arguments
