@@ -75,6 +75,9 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         lblRagistrarPaciente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(1280, 720));
 
         lblInformacionGralPaciente.setText("Informacion general del paciente:");
 
@@ -95,6 +98,11 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         btnGuardarRegistroPaciente.setText("Guardar");
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelGeneralLayout = new javax.swing.GroupLayout(panelGeneral);
         panelGeneral.setLayout(panelGeneralLayout);
@@ -102,8 +110,8 @@ public class RegistrarPaciente extends javax.swing.JFrame {
             panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGeneralLayout.createSequentialGroup()
                 .addContainerGap(414, Short.MAX_VALUE)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGeneralLayout.createSequentialGroup()
+                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelGeneralLayout.createSequentialGroup()
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPropietario)
                             .addComponent(lblEspecie)
@@ -120,13 +128,11 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                             .addComponent(txtRaza)
                             .addComponent(txtSexo)
                             .addComponent(txtColor)
-                            .addComponent(txtSeñasParticulares, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
-                        .addGap(396, 396, 396))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGeneralLayout.createSequentialGroup()
-                        .addComponent(btnGuardarRegistroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64))))
+                            .addComponent(txtSeñasParticulares, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)))
+                    .addComponent(btnGuardarRegistroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(218, 218, 218))
             .addGroup(panelGeneralLayout.createSequentialGroup()
                 .addGap(516, 516, 516)
                 .addComponent(lblInformacionGralPaciente)
@@ -165,11 +171,11 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSeñasParticulares)
                     .addComponent(txtSeñasParticulares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardarRegistroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                .addGap(23, 23, 23))
         );
 
         jTabbedPane1.addTab("General", panelGeneral);
@@ -206,37 +212,36 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         ScrollPanelVacunas.setViewportView(tablaVacunas);
 
         btnCancelarVacuna.setText("Cancelar");
+        btnCancelarVacuna.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelarVacunaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelVacunasLayout = new javax.swing.GroupLayout(panelVacunas);
         panelVacunas.setLayout(panelVacunasLayout);
         panelVacunasLayout.setHorizontalGroup(
             panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVacunasLayout.createSequentialGroup()
-                .addContainerGap(412, Short.MAX_VALUE)
-                .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelVacunasLayout.createSequentialGroup()
-                        .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFechaDeAplicacion)
-                            .addComponent(lblLote)
-                            .addComponent(lblLaboratorio))
-                        .addGap(117, 117, 117)
-                        .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtVacuna)
-                            .addComponent(txtFechaDeAplicacion)
-                            .addComponent(txtLote)
-                            .addComponent(txtLaboratorio, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVacunasLayout.createSequentialGroup()
-                        .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblVacuna)
-                            .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(ScrollPanelVacunas, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnAgregarVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(349, 349, 349))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVacunasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancelarVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(128, 128, 128))
+            .addGroup(panelVacunasLayout.createSequentialGroup()
+                .addGap(338, 338, 338)
+                .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCancelarVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(ScrollPanelVacunas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelVacunasLayout.createSequentialGroup()
+                            .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblFechaDeAplicacion)
+                                .addComponent(lblLote)
+                                .addComponent(lblLaboratorio)
+                                .addComponent(lblVacuna))
+                            .addGap(117, 117, 117)
+                            .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtVacuna)
+                                .addComponent(txtFechaDeAplicacion)
+                                .addComponent(txtLote)
+                                .addComponent(txtLaboratorio, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)))
+                        .addComponent(btnAgregarVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(412, Short.MAX_VALUE))
         );
         panelVacunasLayout.setVerticalGroup(
             panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,13 +266,12 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                 .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLaboratorio))
-                .addGap(43, 43, 43)
+                .addGap(18, 18, 18)
                 .addComponent(btnAgregarVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(ScrollPanelVacunas, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancelarVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(ScrollPanelVacunas, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(btnCancelarVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("Vacunas", panelVacunas);
@@ -302,6 +306,16 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         scrollPanelConsultas.setViewportView(jTable1);
 
         btnCancelarConculta.setText("Cancelar");
+        btnCancelarConculta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelarConcultaMouseClicked(evt);
+            }
+        });
+        btnCancelarConculta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarConcultaActionPerformed(evt);
+            }
+        });
 
         btnFinalizarRegistro.setText("Finalizar registro");
 
@@ -312,26 +326,24 @@ public class RegistrarPaciente extends javax.swing.JFrame {
             .addGroup(panelConsultasLayout.createSequentialGroup()
                 .addGap(443, 443, 443)
                 .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAgregarDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelConsultasLayout.createSequentialGroup()
-                        .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDiagnostico)
-                            .addComponent(lblFechaDiagnostico)
-                            .addComponent(lblTratamiento))
-                        .addGap(20, 20, 20)
-                        .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtFechaDiagnostico)
-                            .addComponent(txtDiagnostico)
-                            .addComponent(txtTratamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConsultasLayout.createSequentialGroup()
-                .addContainerGap(401, Short.MAX_VALUE)
-                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPanelConsultas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFinalizarRegistro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(scrollPanelConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAgregarDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelConsultasLayout.createSequentialGroup()
+                                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDiagnostico)
+                                    .addComponent(lblFechaDiagnostico)
+                                    .addComponent(lblTratamiento))
+                                .addGap(20, 20, 20)
+                                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFechaDiagnostico)
+                                    .addComponent(txtDiagnostico)
+                                    .addComponent(txtTratamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))))
+                    .addComponent(btnFinalizarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addComponent(btnCancelarConculta, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(213, 213, 213))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
         panelConsultasLayout.setVerticalGroup(
             panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,15 +360,15 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                 .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblTratamiento)
                     .addComponent(txtTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(btnAgregarDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(scrollPanelConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCancelarConculta, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(btnFinalizarRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnAgregarDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(scrollPanelConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFinalizarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelarConculta, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consultas", panelConsultas);
@@ -368,26 +380,48 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(579, 579, 579)
+                .addGap(529, 529, 529)
                 .addComponent(lblRagistrarPaciente)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(638, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(28, 28, 28)
                 .addComponent(lblRagistrarPaciente)
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarConcultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarConcultaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarConcultaActionPerformed
+
+    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
+        ElijeOpcion EO = new ElijeOpcion();
+        EO.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnCancelarMouseClicked
+
+    private void btnCancelarVacunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVacunaMouseClicked
+        ElijeOpcion EO = new ElijeOpcion();
+        EO.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnCancelarVacunaMouseClicked
+
+    private void btnCancelarConcultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarConcultaMouseClicked
+        ElijeOpcion EO = new ElijeOpcion();
+        EO.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnCancelarConcultaMouseClicked
 
     /**
      * @param args the command line arguments

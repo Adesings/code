@@ -45,6 +45,11 @@ public class Busqueda extends javax.swing.JFrame {
         lblApellidoPaternoBusqueda.setText("Apellido paterno:");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseClicked(evt);
+            }
+        });
 
         btnCancelarBusqueda.setText("Cancelar");
         btnCancelarBusqueda.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -107,6 +112,17 @@ public class Busqueda extends javax.swing.JFrame {
         EO.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarBusquedaMouseClicked
+
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
+        // Levar a cabo la busqueda
+        
+        
+        //Vista de Resultados Busqueda
+        ResultadosBusqueda RB = new ResultadosBusqueda();
+        RB.setVisible(true);
+        dispose();
+        
+    }//GEN-LAST:event_btnBuscarMouseClicked
 
     /**
      * @param args the command line arguments

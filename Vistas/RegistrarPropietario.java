@@ -51,6 +51,11 @@ public class RegistrarPropietario extends javax.swing.JFrame {
         lblTelefono.setText("Teléfono:");
 
         btnGuardarPropietario.setText("Guardar");
+        btnGuardarPropietario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarPropietarioMouseClicked(evt);
+            }
+        });
 
         btnCancelarRegistroPropietario.setText("Cancelar");
         btnCancelarRegistroPropietario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -133,6 +138,19 @@ public class RegistrarPropietario extends javax.swing.JFrame {
         EO.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarRegistroPropietarioMouseClicked
+
+    private void btnGuardarPropietarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarPropietarioMouseClicked
+        // Guardar Datos en BD
+        
+        //Mostrar ventana registrar Paciente
+        RegistrarPaciente RP = new RegistrarPaciente();
+        RP.setVisible(true);
+        dispose();
+        
+        
+        
+        
+    }//GEN-LAST:event_btnGuardarPropietarioMouseClicked
 
     /**
      * @param args the command line arguments
