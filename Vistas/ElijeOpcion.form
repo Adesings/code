@@ -26,13 +26,13 @@
           <Group type="102" attributes="0">
               <EmptySpace pref="653" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                      <Component id="btnBusqueda" min="-2" pref="190" max="-2" attributes="0"/>
-                      <Component id="btnRegistrar" min="-2" pref="190" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnBusqueda" min="-2" pref="190" max="-2" attributes="0"/>
+                          <Component id="btnRegistrar" min="-2" pref="190" max="-2" attributes="0"/>
                           <Component id="lblEligeOpcion" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="575" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="489" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btnCerrarSesion" min="-2" pref="195" max="-2" attributes="0"/>
