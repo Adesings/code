@@ -1,22 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Vistas;
+
+import Controladores.Ctrl_RegistrarPaciente;
+import Modelos.*;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author miguelhernandez
+ * @author Alex
  */
 public class RegistrarPaciente extends javax.swing.JFrame {
+    
+    Ctrl_RegistrarPaciente control;
+    Propietario propietario;//es la llave primaria del propietario de la mascota
+    DefaultTableModel modelovacu;
+    DefaultTableModel modeloconsul;
+    int idmascota;//llave primaria de la mascota
+    
+    public RegistrarPaciente( Propietario propietario ) {
+        initComponents();
+        control = new Ctrl_RegistrarPaciente();
+        control.setPropietario(propietario);
+        modelovacu = (DefaultTableModel) this.jTable1.getModel();
+        modeloconsul = (DefaultTableModel) this.jTable2.getModel();
+    }
 
     /**
-     * Creates new form registrarPaciente
+     * Creates new form RegistrarPaciente
      */
     public RegistrarPaciente() {
         initComponents();
+        this.getContentPane().setBackground(new java.awt.Color (224,255,255));
     }
 
     /**
@@ -29,399 +43,490 @@ public class RegistrarPaciente extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        panelGeneral = new javax.swing.JPanel();
-        lblInformacionGralPaciente = new javax.swing.JLabel();
-        lblPropietario = new javax.swing.JLabel();
-        lblEspecie = new javax.swing.JLabel();
-        lblNombreDelPaciente = new javax.swing.JLabel();
-        lblRaza = new javax.swing.JLabel();
-        lblSexo = new javax.swing.JLabel();
-        lblColor = new javax.swing.JLabel();
-        lblSeñasParticulares = new javax.swing.JLabel();
-        txtPropietario = new javax.swing.JTextField();
-        txtEspecie = new javax.swing.JTextField();
-        txtNombreDelPaciente = new javax.swing.JTextField();
-        txtRaza = new javax.swing.JTextField();
-        txtSexo = new javax.swing.JTextField();
-        txtColor = new javax.swing.JTextField();
-        txtSeñasParticulares = new javax.swing.JTextField();
-        btnGuardarRegistroPaciente = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        panelVacunas = new javax.swing.JPanel();
-        lblVacuna = new javax.swing.JLabel();
-        txtVacuna = new javax.swing.JTextField();
-        lblFechaDeAplicacion = new javax.swing.JLabel();
-        lblLote = new javax.swing.JLabel();
-        lblLaboratorio = new javax.swing.JLabel();
-        txtFechaDeAplicacion = new javax.swing.JTextField();
-        txtLote = new javax.swing.JTextField();
-        txtLaboratorio = new javax.swing.JTextField();
-        btnAgregarVacuna = new javax.swing.JButton();
-        ScrollPanelVacunas = new javax.swing.JScrollPane();
-        tablaVacunas = new javax.swing.JTable();
-        btnCancelarVacuna = new javax.swing.JButton();
-        panelConsultas = new javax.swing.JPanel();
-        lblDiagnostico = new javax.swing.JLabel();
-        lblFechaDiagnostico = new javax.swing.JLabel();
-        lblTratamiento = new javax.swing.JLabel();
-        txtDiagnostico = new javax.swing.JTextField();
-        txtFechaDiagnostico = new javax.swing.JTextField();
-        txtTratamiento = new javax.swing.JTextField();
-        btnAgregarDiagnostico = new javax.swing.JButton();
-        scrollPanelConsultas = new javax.swing.JScrollPane();
+        pan_General = new javax.swing.JPanel();
+        lbl_Encabezado = new javax.swing.JLabel();
+        lbl_Especie = new javax.swing.JLabel();
+        lbl_Nombre = new javax.swing.JLabel();
+        lbl_Sexo = new javax.swing.JLabel();
+        lbl_Raza = new javax.swing.JLabel();
+        lbl_Color = new javax.swing.JLabel();
+        lbl_senPart = new javax.swing.JLabel();
+        txt_nombrePaciente = new javax.swing.JTextField();
+        txt_Raza = new javax.swing.JTextField();
+        txt_Sexo = new javax.swing.JTextField();
+        txt_Color = new javax.swing.JTextField();
+        txt_senPart = new javax.swing.JTextField();
+        comb_Especie = new javax.swing.JComboBox();
+        btn_Cancelar = new javax.swing.JButton();
+        btn_Siguiente = new javax.swing.JButton();
+        img_Logo = new javax.swing.JLabel();
+        pan_Vacunas = new javax.swing.JPanel();
+        lbl_Encabezado1 = new javax.swing.JLabel();
+        lbl_Vacuna = new javax.swing.JLabel();
+        lbl_Lote = new javax.swing.JLabel();
+        lbl_Laboratorio = new javax.swing.JLabel();
+        lbl_fechaAplicacion = new javax.swing.JLabel();
+        comb_Laboratorio = new javax.swing.JComboBox();
+        txt_fechaAplicacion = new javax.swing.JTextField();
+        txt_Lote = new javax.swing.JTextField();
+        comb_Vacuna = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        btnCancelarConculta = new javax.swing.JButton();
-        btnFinalizarRegistro = new javax.swing.JButton();
-        lblRagistrarPaciente = new javax.swing.JLabel();
+        btn_agregarVacuna = new javax.swing.JButton();
+        btn_Cancelar1 = new javax.swing.JButton();
+        btn_Siguiente1 = new javax.swing.JButton();
+        img_Logo1 = new javax.swing.JLabel();
+        pan_Consultas = new javax.swing.JPanel();
+        lbl_Tratamiento = new javax.swing.JLabel();
+        lbl_fechaDiagnostico = new javax.swing.JLabel();
+        lbl_Diagnostico = new javax.swing.JLabel();
+        lbl_Encabezado2 = new javax.swing.JLabel();
+        txt_fechaDiagnostico = new javax.swing.JTextField();
+        txt_Tratamiento = new javax.swing.JTextField();
+        txt_Diagnostico = new javax.swing.JTextField();
+        btn_Cancelar2 = new javax.swing.JButton();
+        btn_Finalizar = new javax.swing.JButton();
+        btn_AgregarDiagnostico = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        img_Logo3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setMinimumSize(new java.awt.Dimension(800, 6008));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(1280, 720));
+        jTabbedPane1.setToolTipText("");
+        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTabbedPane1.setMaximumSize(new java.awt.Dimension(800, 600));
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(800, 600));
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(800, 600));
 
-        lblInformacionGralPaciente.setText("Informacion general del paciente:");
+        pan_General.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblPropietario.setText("Propietario:");
+        lbl_Encabezado.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_Encabezado.setText("Información General Del Paciente");
+        pan_General.add(lbl_Encabezado, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
-        lblEspecie.setText("Especie:");
+        lbl_Especie.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Especie.setText("Especie:");
+        pan_General.add(lbl_Especie, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, -1, -1));
 
-        lblNombreDelPaciente.setText("Nombre del paciente:");
+        lbl_Nombre.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Nombre.setText("Nombre:");
+        pan_General.add(lbl_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
 
-        lblRaza.setText("Raza:");
+        lbl_Sexo.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Sexo.setText("Sexo:");
+        pan_General.add(lbl_Sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
 
-        lblSexo.setText("Sexo:");
+        lbl_Raza.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Raza.setText("Raza:");
+        pan_General.add(lbl_Raza, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, -1, -1));
 
-        lblColor.setText("Color:");
+        lbl_Color.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Color.setText("Color:");
+        pan_General.add(lbl_Color, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, -1, -1));
 
-        lblSeñasParticulares.setText("Señas Particulares:");
+        lbl_senPart.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_senPart.setText("Señas Part.:");
+        pan_General.add(lbl_senPart, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, -1, -1));
 
-        btnGuardarRegistroPaciente.setText("Guardar");
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
+        txt_nombrePaciente.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txt_nombrePaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nombrePacienteActionPerformed(evt);
             }
         });
+        pan_General.add(txt_nombrePaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 350, -1));
 
-        javax.swing.GroupLayout panelGeneralLayout = new javax.swing.GroupLayout(panelGeneral);
-        panelGeneral.setLayout(panelGeneralLayout);
-        panelGeneralLayout.setHorizontalGroup(
-            panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGeneralLayout.createSequentialGroup()
-                .addContainerGap(414, Short.MAX_VALUE)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelGeneralLayout.createSequentialGroup()
-                        .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPropietario)
-                            .addComponent(lblEspecie)
-                            .addComponent(lblNombreDelPaciente)
-                            .addComponent(lblRaza)
-                            .addComponent(lblSexo)
-                            .addComponent(lblColor)
-                            .addComponent(lblSeñasParticulares))
-                        .addGap(58, 58, 58)
-                        .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPropietario)
-                            .addComponent(txtEspecie)
-                            .addComponent(txtNombreDelPaciente)
-                            .addComponent(txtRaza)
-                            .addComponent(txtSexo)
-                            .addComponent(txtColor)
-                            .addComponent(txtSeñasParticulares, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)))
-                    .addComponent(btnGuardarRegistroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(218, 218, 218))
-            .addGroup(panelGeneralLayout.createSequentialGroup()
-                .addGap(516, 516, 516)
-                .addComponent(lblInformacionGralPaciente)
-                .addGap(0, 521, Short.MAX_VALUE))
-        );
-        panelGeneralLayout.setVerticalGroup(
-            panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGeneralLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(lblInformacionGralPaciente)
-                .addGap(36, 36, 36)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPropietario)
-                    .addComponent(txtPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEspecie)
-                    .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombreDelPaciente)
-                    .addComponent(txtNombreDelPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRaza)
-                    .addComponent(txtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSexo)
-                    .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblColor)
-                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSeñasParticulares)
-                    .addComponent(txtSeñasParticulares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarRegistroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
-        );
+        txt_Raza.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        pan_General.add(txt_Raza, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 350, -1));
 
-        jTabbedPane1.addTab("General", panelGeneral);
+        txt_Sexo.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txt_Sexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_SexoActionPerformed(evt);
+            }
+        });
+        pan_General.add(txt_Sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, 350, -1));
 
-        lblVacuna.setText("Vacuna:");
+        txt_Color.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        pan_General.add(txt_Color, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 350, -1));
 
-        lblFechaDeAplicacion.setText("Fecha de aplicación:");
+        txt_senPart.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txt_senPart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_senPartActionPerformed(evt);
+            }
+        });
+        pan_General.add(txt_senPart, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 350, -1));
 
-        lblLote.setText("Lote:");
+        comb_Especie.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        comb_Especie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Canino", "Felino", "Roedor", "Ave", "Mustélido", "Lepórido", "Especies Exóticas" }));
+        comb_Especie.setToolTipText("");
+        comb_Especie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comb_EspecieActionPerformed(evt);
+            }
+        });
+        pan_General.add(comb_Especie, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 350, -1));
 
-        lblLaboratorio.setText("Laboratorio:");
+        btn_Cancelar.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_Cancelar.setText("Cancelar");
+        btn_Cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_CancelarMouseClicked(evt);
+            }
+        });
+        btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancelarActionPerformed(evt);
+            }
+        });
+        pan_General.add(btn_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 160, 50));
 
-        btnAgregarVacuna.setText("Agregar vacuna");
+        btn_Siguiente.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_Siguiente.setText("Siguiente");
+        btn_Siguiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_SiguienteMouseClicked(evt);
+            }
+        });
+        btn_Siguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SiguienteActionPerformed(evt);
+            }
+        });
+        pan_General.add(btn_Siguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 510, 160, 50));
 
-        tablaVacunas.setModel(new javax.swing.table.DefaultTableModel(
+        img_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        pan_General.add(img_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, -1, -1));
+
+        jTabbedPane1.addTab("General", pan_General);
+
+        pan_Vacunas.setMaximumSize(new java.awt.Dimension(750, 550));
+        pan_Vacunas.setMinimumSize(new java.awt.Dimension(750, 550));
+        pan_Vacunas.setPreferredSize(new java.awt.Dimension(750, 550));
+        pan_Vacunas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_Encabezado1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_Encabezado1.setText("Vacunas");
+        pan_Vacunas.add(lbl_Encabezado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+
+        lbl_Vacuna.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Vacuna.setText("Vacuna:");
+        pan_Vacunas.add(lbl_Vacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+
+        lbl_Lote.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Lote.setText("Lote:");
+        pan_Vacunas.add(lbl_Lote, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+
+        lbl_Laboratorio.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Laboratorio.setText("Laboratorio:");
+        pan_Vacunas.add(lbl_Laboratorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, -1, -1));
+
+        lbl_fechaAplicacion.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_fechaAplicacion.setText("Fecha de aplicación:");
+        pan_Vacunas.add(lbl_fechaAplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 40));
+
+        comb_Laboratorio.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        comb_Laboratorio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pfizer", "Virbac", "Mend", "Intervet" }));
+        comb_Laboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comb_LaboratorioActionPerformed(evt);
+            }
+        });
+        pan_Vacunas.add(comb_Laboratorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, 210, -1));
+
+        txt_fechaAplicacion.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        pan_Vacunas.add(txt_fechaAplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 290, -1));
+
+        txt_Lote.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        pan_Vacunas.add(txt_Lote, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 250, -1));
+
+        comb_Vacuna.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        comb_Vacuna.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Séxtuple", "Rábia", "Séxtuple c/Rábia", "Bordetella/Parainfluenza", "Quíntuple Felina", "Triple" }));
+        pan_Vacunas.add(comb_Vacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 280, -1));
+
+        jTable1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Vacuna", "Fecha", "Lote", "Laboratorio"
+                "Vacuna", "Fecha de Aplicación", "Lote", "Laboratorio"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        ScrollPanelVacunas.setViewportView(tablaVacunas);
-
-        btnCancelarVacuna.setText("Cancelar");
-        btnCancelarVacuna.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarVacunaMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelVacunasLayout = new javax.swing.GroupLayout(panelVacunas);
-        panelVacunas.setLayout(panelVacunasLayout);
-        panelVacunasLayout.setHorizontalGroup(
-            panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelVacunasLayout.createSequentialGroup()
-                .addGap(338, 338, 338)
-                .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCancelarVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(ScrollPanelVacunas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelVacunasLayout.createSequentialGroup()
-                            .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblFechaDeAplicacion)
-                                .addComponent(lblLote)
-                                .addComponent(lblLaboratorio)
-                                .addComponent(lblVacuna))
-                            .addGap(117, 117, 117)
-                            .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtVacuna)
-                                .addComponent(txtFechaDeAplicacion)
-                                .addComponent(txtLote)
-                                .addComponent(txtLaboratorio, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)))
-                        .addComponent(btnAgregarVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(412, Short.MAX_VALUE))
-        );
-        panelVacunasLayout.setVerticalGroup(
-            panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelVacunasLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelVacunasLayout.createSequentialGroup()
-                        .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelVacunasLayout.createSequentialGroup()
-                                .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblVacuna)
-                                    .addComponent(txtVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(62, 62, 62))
-                            .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtFechaDeAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblFechaDeAplicacion)))
-                        .addGap(66, 66, 66))
-                    .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblLote)))
-                .addGap(34, 34, 34)
-                .addGroup(panelVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLaboratorio))
-                .addGap(18, 18, 18)
-                .addComponent(btnAgregarVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ScrollPanelVacunas, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(btnCancelarVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jTabbedPane1.addTab("Vacunas", panelVacunas);
-
-        lblDiagnostico.setText("Diagnóstico:");
-
-        lblFechaDiagnostico.setText("Fecha de diagnostico:");
-
-        lblTratamiento.setText("Tratamiento:");
-
-        btnAgregarDiagnostico.setText("Agregar diagnóstico");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Diagnóstico", "Fecha", "Tratamiento"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-        });
-        scrollPanelConsultas.setViewportView(jTable1);
 
-        btnCancelarConculta.setText("Cancelar");
-        btnCancelarConculta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        pan_Vacunas.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 690, 100));
+
+        btn_agregarVacuna.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_agregarVacuna.setText("Agregar Vacuna");
+        btn_agregarVacuna.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarConcultaMouseClicked(evt);
+                btn_agregarVacunaMouseClicked(evt);
             }
         });
-        btnCancelarConculta.addActionListener(new java.awt.event.ActionListener() {
+        pan_Vacunas.add(btn_agregarVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 210, 50));
+
+        btn_Cancelar1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_Cancelar1.setText("Cancelar");
+        btn_Cancelar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_Cancelar1MouseClicked(evt);
+            }
+        });
+        pan_Vacunas.add(btn_Cancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, 170, 50));
+
+        btn_Siguiente1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_Siguiente1.setText("Siguiente");
+        btn_Siguiente1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_Siguiente1MouseClicked(evt);
+            }
+        });
+        pan_Vacunas.add(btn_Siguiente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 170, 50));
+
+        img_Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        pan_Vacunas.add(img_Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, -1, -1));
+
+        jTabbedPane1.addTab("Vacunas", pan_Vacunas);
+
+        pan_Consultas.setMaximumSize(new java.awt.Dimension(750, 550));
+        pan_Consultas.setMinimumSize(new java.awt.Dimension(750, 550));
+        pan_Consultas.setPreferredSize(new java.awt.Dimension(750, 550));
+        pan_Consultas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_Tratamiento.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Tratamiento.setText("Tratamiento:");
+        pan_Consultas.add(lbl_Tratamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+
+        lbl_fechaDiagnostico.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_fechaDiagnostico.setText("Fecha de Diagnóstico:");
+        pan_Consultas.add(lbl_fechaDiagnostico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+
+        lbl_Diagnostico.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Diagnostico.setText("Diagnóstico:");
+        pan_Consultas.add(lbl_Diagnostico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+
+        lbl_Encabezado2.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_Encabezado2.setText("Consultas");
+        pan_Consultas.add(lbl_Encabezado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
+
+        txt_fechaDiagnostico.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txt_fechaDiagnostico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarConcultaActionPerformed(evt);
+                txt_fechaDiagnosticoActionPerformed(evt);
             }
         });
+        pan_Consultas.add(txt_fechaDiagnostico, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 370, -1));
 
-        btnFinalizarRegistro.setText("Finalizar registro");
+        txt_Tratamiento.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txt_Tratamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_TratamientoActionPerformed(evt);
+            }
+        });
+        pan_Consultas.add(txt_Tratamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 480, 80));
 
-        javax.swing.GroupLayout panelConsultasLayout = new javax.swing.GroupLayout(panelConsultas);
-        panelConsultas.setLayout(panelConsultasLayout);
-        panelConsultasLayout.setHorizontalGroup(
-            panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelConsultasLayout.createSequentialGroup()
-                .addGap(443, 443, 443)
-                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(scrollPanelConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAgregarDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelConsultasLayout.createSequentialGroup()
-                                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblDiagnostico)
-                                    .addComponent(lblFechaDiagnostico)
-                                    .addComponent(lblTratamiento))
-                                .addGap(20, 20, 20)
-                                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFechaDiagnostico)
-                                    .addComponent(txtDiagnostico)
-                                    .addComponent(txtTratamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))))
-                    .addComponent(btnFinalizarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(btnCancelarConculta, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(220, Short.MAX_VALUE))
-        );
-        panelConsultasLayout.setVerticalGroup(
-            panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelConsultasLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblDiagnostico)
-                    .addComponent(txtDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFechaDiagnostico)
-                    .addComponent(txtFechaDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTratamiento)
-                    .addComponent(txtTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnAgregarDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(scrollPanelConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addGroup(panelConsultasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFinalizarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelarConculta, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
+        txt_Diagnostico.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        pan_Consultas.add(txt_Diagnostico, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 480, -1));
 
-        jTabbedPane1.addTab("Consultas", panelConsultas);
+        btn_Cancelar2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_Cancelar2.setText("Cancelar");
+        btn_Cancelar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_Cancelar2MouseClicked(evt);
+            }
+        });
+        pan_Consultas.add(btn_Cancelar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 140, 50));
 
-        lblRagistrarPaciente.setText("Registrar paciente");
+        btn_Finalizar.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_Finalizar.setText("Finalizar Registro");
+        btn_Finalizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_FinalizarMouseClicked(evt);
+            }
+        });
+        pan_Consultas.add(btn_Finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, 230, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(529, 529, 529)
-                .addComponent(lblRagistrarPaciente)
-                .addContainerGap(638, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(lblRagistrarPaciente)
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        btn_AgregarDiagnostico.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_AgregarDiagnostico.setText("Agregar Diagnóstico");
+        btn_AgregarDiagnostico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_AgregarDiagnosticoMouseClicked(evt);
+            }
+        });
+        pan_Consultas.add(btn_AgregarDiagnostico, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 260, 50));
+
+        jTable2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Diagnóstico", "Fecha de Diagnóstico", "Tratamiento"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        pan_Consultas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 690, 110));
+
+        img_Logo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        pan_Consultas.add(img_Logo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, -1, -1));
+
+        jTabbedPane1.addTab("Consultas", pan_Consultas);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 740, 610));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarConcultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarConcultaActionPerformed
+    private void btn_SiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SiguienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelarConcultaActionPerformed
+    }//GEN-LAST:event_btn_SiguienteActionPerformed
 
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-        ElijeOpcion EO = new ElijeOpcion();
-        EO.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnCancelarMouseClicked
+    private void btn_SiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_SiguienteMouseClicked
+        
+        
+        
+        try
+        {
+            control.creaPaciente(txt_nombrePaciente.getText(), comb_Especie.getSelectedItem().toString(),
+                    txt_Raza.getText(), txt_Sexo.getText(), txt_Color.getText(), 
+                    txt_senPart.getText(), control.getpropietario().getIdPropietario());
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        //agregar que se mueva a la siguiente pestaña
+    }//GEN-LAST:event_btn_SiguienteMouseClicked
 
-    private void btnCancelarVacunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVacunaMouseClicked
-        ElijeOpcion EO = new ElijeOpcion();
-        EO.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnCancelarVacunaMouseClicked
+    private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_CancelarActionPerformed
 
-    private void btnCancelarConcultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarConcultaMouseClicked
-        ElijeOpcion EO = new ElijeOpcion();
-        EO.setVisible(true);
+    private void btn_CancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CancelarMouseClicked
+        EligeOpcion eo = new EligeOpcion();
+        eo.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnCancelarConcultaMouseClicked
+    }//GEN-LAST:event_btn_CancelarMouseClicked
+
+    private void comb_EspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comb_EspecieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comb_EspecieActionPerformed
+
+    private void txt_senPartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_senPartActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_senPartActionPerformed
+
+    private void txt_SexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SexoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_SexoActionPerformed
+
+    private void txt_nombrePacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombrePacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombrePacienteActionPerformed
+
+    private void comb_LaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comb_LaboratorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comb_LaboratorioActionPerformed
+
+    private void txt_TratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TratamientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_TratamientoActionPerformed
+
+    private void txt_fechaDiagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_fechaDiagnosticoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_fechaDiagnosticoActionPerformed
+
+    private void btn_Siguiente1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Siguiente1MouseClicked
+        
+        
+    }//GEN-LAST:event_btn_Siguiente1MouseClicked
+
+    private void btn_FinalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_FinalizarMouseClicked
+        EligeOpcion eo = new EligeOpcion();
+        eo.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_FinalizarMouseClicked
+
+    private void btn_AgregarDiagnosticoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_AgregarDiagnosticoMouseClicked
+        
+        try
+        {
+            control.creaConsulta(txt_Diagnostico.getText(), txt_fechaDiagnostico.getText(), 
+                    txt_Tratamiento.getText(), control.getpropietario().getMascota().getIdMascota());
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        
+        Object datos[] = {txt_Diagnostico.getText(), txt_fechaDiagnostico.getText(), txt_Tratamiento.getText()};
+        modeloconsul.addRow(datos);
+        
+    }//GEN-LAST:event_btn_AgregarDiagnosticoMouseClicked
+
+    private void btn_agregarVacunaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregarVacunaMouseClicked
+        
+        try
+        {
+            control.creaVacuna( comb_Vacuna.getSelectedItem().toString(), txt_fechaAplicacion.getText(), 
+                    txt_Lote.getText(), comb_Laboratorio.getSelectedItem().toString(), control.getpropietario().getMascota().getIdMascota() );
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        
+        Object datos[] = {comb_Vacuna.getSelectedItem().toString(), txt_fechaAplicacion.getText(), 
+            txt_Lote.getText(), comb_Laboratorio.getSelectedItem().toString()};
+        modelovacu.addRow(datos);
+        
+    }//GEN-LAST:event_btn_agregarVacunaMouseClicked
+
+    private void btn_Cancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Cancelar1MouseClicked
+        EligeOpcion eo = new EligeOpcion();
+        eo.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_Cancelar1MouseClicked
+
+    private void btn_Cancelar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Cancelar2MouseClicked
+        EligeOpcion eo = new EligeOpcion();
+        eo.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_Cancelar2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -459,50 +564,53 @@ public class RegistrarPaciente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane ScrollPanelVacunas;
-    private javax.swing.JButton btnAgregarDiagnostico;
-    private javax.swing.JButton btnAgregarVacuna;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnCancelarConculta;
-    private javax.swing.JButton btnCancelarVacuna;
-    private javax.swing.JButton btnFinalizarRegistro;
-    private javax.swing.JButton btnGuardarRegistroPaciente;
+    private javax.swing.JButton btn_AgregarDiagnostico;
+    private javax.swing.JButton btn_Cancelar;
+    private javax.swing.JButton btn_Cancelar1;
+    private javax.swing.JButton btn_Cancelar2;
+    private javax.swing.JButton btn_Finalizar;
+    private javax.swing.JButton btn_Siguiente;
+    private javax.swing.JButton btn_Siguiente1;
+    private javax.swing.JButton btn_agregarVacuna;
+    private javax.swing.JComboBox comb_Especie;
+    private javax.swing.JComboBox comb_Laboratorio;
+    private javax.swing.JComboBox comb_Vacuna;
+    private javax.swing.JLabel img_Logo;
+    private javax.swing.JLabel img_Logo1;
+    private javax.swing.JLabel img_Logo3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel lblColor;
-    private javax.swing.JLabel lblDiagnostico;
-    private javax.swing.JLabel lblEspecie;
-    private javax.swing.JLabel lblFechaDeAplicacion;
-    private javax.swing.JLabel lblFechaDiagnostico;
-    private javax.swing.JLabel lblInformacionGralPaciente;
-    private javax.swing.JLabel lblLaboratorio;
-    private javax.swing.JLabel lblLote;
-    private javax.swing.JLabel lblNombreDelPaciente;
-    private javax.swing.JLabel lblPropietario;
-    private javax.swing.JLabel lblRagistrarPaciente;
-    private javax.swing.JLabel lblRaza;
-    private javax.swing.JLabel lblSexo;
-    private javax.swing.JLabel lblSeñasParticulares;
-    private javax.swing.JLabel lblTratamiento;
-    private javax.swing.JLabel lblVacuna;
-    private javax.swing.JPanel panelConsultas;
-    private javax.swing.JPanel panelGeneral;
-    private javax.swing.JPanel panelVacunas;
-    private javax.swing.JScrollPane scrollPanelConsultas;
-    private javax.swing.JTable tablaVacunas;
-    private javax.swing.JTextField txtColor;
-    private javax.swing.JTextField txtDiagnostico;
-    private javax.swing.JTextField txtEspecie;
-    private javax.swing.JTextField txtFechaDeAplicacion;
-    private javax.swing.JTextField txtFechaDiagnostico;
-    private javax.swing.JTextField txtLaboratorio;
-    private javax.swing.JTextField txtLote;
-    private javax.swing.JTextField txtNombreDelPaciente;
-    private javax.swing.JTextField txtPropietario;
-    private javax.swing.JTextField txtRaza;
-    private javax.swing.JTextField txtSexo;
-    private javax.swing.JTextField txtSeñasParticulares;
-    private javax.swing.JTextField txtTratamiento;
-    private javax.swing.JTextField txtVacuna;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JLabel lbl_Color;
+    private javax.swing.JLabel lbl_Diagnostico;
+    private javax.swing.JLabel lbl_Encabezado;
+    private javax.swing.JLabel lbl_Encabezado1;
+    private javax.swing.JLabel lbl_Encabezado2;
+    private javax.swing.JLabel lbl_Especie;
+    private javax.swing.JLabel lbl_Laboratorio;
+    private javax.swing.JLabel lbl_Lote;
+    private javax.swing.JLabel lbl_Nombre;
+    private javax.swing.JLabel lbl_Raza;
+    private javax.swing.JLabel lbl_Sexo;
+    private javax.swing.JLabel lbl_Tratamiento;
+    private javax.swing.JLabel lbl_Vacuna;
+    private javax.swing.JLabel lbl_fechaAplicacion;
+    private javax.swing.JLabel lbl_fechaDiagnostico;
+    private javax.swing.JLabel lbl_senPart;
+    private javax.swing.JPanel pan_Consultas;
+    private javax.swing.JPanel pan_General;
+    private javax.swing.JPanel pan_Vacunas;
+    private javax.swing.JTextField txt_Color;
+    private javax.swing.JTextField txt_Diagnostico;
+    private javax.swing.JTextField txt_Lote;
+    private javax.swing.JTextField txt_Raza;
+    private javax.swing.JTextField txt_Sexo;
+    private javax.swing.JTextField txt_Tratamiento;
+    private javax.swing.JTextField txt_fechaAplicacion;
+    private javax.swing.JTextField txt_fechaDiagnostico;
+    private javax.swing.JTextField txt_nombrePaciente;
+    private javax.swing.JTextField txt_senPart;
     // End of variables declaration//GEN-END:variables
 }

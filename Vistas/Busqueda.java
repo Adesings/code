@@ -5,6 +5,11 @@
  */
 
 package Vistas;
+import Controladores.*; 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -17,6 +22,7 @@ public class Busqueda extends javax.swing.JFrame {
      */
     public Busqueda() {
         initComponents();
+        this.getContentPane().setBackground(new java.awt.Color (224,255,255));
     }
 
     /**
@@ -28,101 +34,92 @@ public class Busqueda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblBusqueda = new javax.swing.JLabel();
-        lblNombreBusqueda = new javax.swing.JLabel();
-        lblApellidoPaternoBusqueda = new javax.swing.JLabel();
-        txtNombreBusqueda = new javax.swing.JTextField();
-        txtApellidoPaternoBusqueda = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
-        btnCancelarBusqueda = new javax.swing.JButton();
+        lbl_Busqueda = new javax.swing.JLabel();
+        lbl_NombreBusqueda = new javax.swing.JLabel();
+        lbl_ApellidoPaternoBusqueda = new javax.swing.JLabel();
+        txt_NombreBusqueda = new javax.swing.JTextField();
+        txt_ApellidoPaternoBusqueda = new javax.swing.JTextField();
+        btn_CancelarBusqueda = new javax.swing.JButton();
+        btn_Buscar = new javax.swing.JButton();
+        img_Logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblBusqueda.setText("Búsqueda");
+        lbl_Busqueda.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_Busqueda.setText("Búsqueda:");
+        getContentPane().add(lbl_Busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
 
-        lblNombreBusqueda.setText("Nombre(s):");
+        lbl_NombreBusqueda.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_NombreBusqueda.setText("Nombre(s) del Propietario:");
+        getContentPane().add(lbl_NombreBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 290, 40));
 
-        lblApellidoPaternoBusqueda.setText("Apellido paterno:");
+        lbl_ApellidoPaternoBusqueda.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_ApellidoPaternoBusqueda.setText("Apellido paterno:");
+        getContentPane().add(lbl_ApellidoPaternoBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 190, -1));
 
-        btnBuscar.setText("Buscar");
-        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+        txt_NombreBusqueda.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        getContentPane().add(txt_NombreBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 420, 40));
+
+        txt_ApellidoPaternoBusqueda.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        getContentPane().add(txt_ApellidoPaternoBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 420, 40));
+
+        btn_CancelarBusqueda.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_CancelarBusqueda.setText("Cancelar Búsqueda");
+        btn_CancelarBusqueda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseClicked(evt);
+                btn_CancelarBusquedaMouseClicked(evt);
             }
         });
+        getContentPane().add(btn_CancelarBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, -1, 50));
 
-        btnCancelarBusqueda.setText("Cancelar");
-        btnCancelarBusqueda.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_Buscar.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_Buscar.setText("Buscar");
+        btn_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarBusquedaMouseClicked(evt);
+                btn_BuscarMouseClicked(evt);
             }
         });
+        btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 370, 160, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(btnCancelarBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(607, 607, 607)
-                        .addComponent(lblBusqueda))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(497, 497, 497)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblApellidoPaternoBusqueda)
-                            .addComponent(lblNombreBusqueda))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombreBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                            .addComponent(txtApellidoPaternoBusqueda))))
-                .addGap(471, 471, 471))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(lblBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombreBusqueda)
-                    .addComponent(txtNombreBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(99, 99, 99)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblApellidoPaternoBusqueda)
-                    .addComponent(txtApellidoPaternoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCancelarBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(32, 32, 32))
-        );
+        img_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        getContentPane().add(img_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarBusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarBusquedaMouseClicked
-        ElijeOpcion EO = new ElijeOpcion();
+    private void btn_CancelarBusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CancelarBusquedaMouseClicked
+        EligeOpcion EO = new EligeOpcion();
         EO.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnCancelarBusquedaMouseClicked
+    }//GEN-LAST:event_btn_CancelarBusquedaMouseClicked
 
-    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        // Levar a cabo la busqueda
+    private void btn_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_BuscarMouseClicked
         
+        String nombrePropietario = txt_NombreBusqueda.getText() ;
+        String apellidoPaterno = txt_ApellidoPaternoBusqueda.getText();
         
-        //Vista de Resultados Busqueda
-        ResultadosBusqueda RB = new ResultadosBusqueda();
-        RB.setVisible(true);
-        dispose();
+            Ctrl_Busqueda busqueda = new Ctrl_Busqueda();
+            try {
+            busqueda.buscar(nombrePropietario,apellidoPaterno);
+            } catch (SQLException ex) {
+            
+            }
+            
+            dispose();
+            
+    }//GEN-LAST:event_btn_BuscarMouseClicked
+
+    private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
         
-    }//GEN-LAST:event_btnBuscarMouseClicked
+    }//GEN-LAST:event_btn_BuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,12 +157,14 @@ public class Busqueda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCancelarBusqueda;
-    private javax.swing.JLabel lblApellidoPaternoBusqueda;
-    private javax.swing.JLabel lblBusqueda;
-    private javax.swing.JLabel lblNombreBusqueda;
-    private javax.swing.JTextField txtApellidoPaternoBusqueda;
-    private javax.swing.JTextField txtNombreBusqueda;
+    private javax.swing.JButton btn_Buscar;
+    private javax.swing.JButton btn_CancelarBusqueda;
+    private javax.swing.JLabel img_Logo;
+    private javax.swing.JLabel lbl_ApellidoPaternoBusqueda;
+    private javax.swing.JLabel lbl_Busqueda;
+    private javax.swing.JLabel lbl_NombreBusqueda;
+    private javax.swing.JTextField txt_ApellidoPaternoBusqueda;
+    private javax.swing.JTextField txt_NombreBusqueda;
     // End of variables declaration//GEN-END:variables
-}
+
+    }

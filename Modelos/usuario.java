@@ -4,17 +4,17 @@ package Modelos;
  *
  * @author miguelhernandez
  */
-public class usuario {
+public class Usuario {
     
     private String nombreUsuario,password;
     
 
-    public usuario (){
+    public Usuario (){
     nombreUsuario=null;
     password=null;
     
 }
-    public usuario (String nombreUsuario,String password){        
+    public Usuario (String nombreUsuario,String password){        
         this.nombreUsuario=nombreUsuario;
         this.password=password;    
     }

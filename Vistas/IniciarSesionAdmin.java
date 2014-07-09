@@ -1,4 +1,7 @@
 package Vistas;
+import Controladores.ControladorConec;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 /**
  *
@@ -11,6 +14,7 @@ public class IniciarSesionAdmin extends javax.swing.JFrame {
      */
     public IniciarSesionAdmin() {
         initComponents();
+        this.getContentPane().setBackground(new java.awt.Color (224,255,255));
     }
 
     /**
@@ -22,109 +26,113 @@ public class IniciarSesionAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblIniciarSesionAdmin = new javax.swing.JLabel();
-        lblUsuarioAdmin = new javax.swing.JLabel();
-        lblContraseñaAdmin = new javax.swing.JLabel();
-        txtUsuarioAdmin = new javax.swing.JTextField();
+        lbl_IniciarSesionAdmin = new javax.swing.JLabel();
+        lbl_UsuarioAdmin = new javax.swing.JLabel();
+        lbl_ContraseñaAdmin = new javax.swing.JLabel();
+        txt_UsuarioAdmin = new javax.swing.JTextField();
         PasswordAdmin = new javax.swing.JPasswordField();
-        btnEntrarAdmin = new javax.swing.JButton();
-        btnCancelarAdmin = new javax.swing.JButton();
+        btn_EntrarAdmin = new javax.swing.JButton();
+        btn_EntrarAdmin1 = new javax.swing.JButton();
+        img_Logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblIniciarSesionAdmin.setText("Iniciar sesión: Administrador sistema");
+        lbl_IniciarSesionAdmin.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_IniciarSesionAdmin.setText("Iniciar sesión: Administrador del sistema");
+        getContentPane().add(lbl_IniciarSesionAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
-        lblUsuarioAdmin.setText("Usuario:");
+        lbl_UsuarioAdmin.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_UsuarioAdmin.setText("Usuario:");
+        getContentPane().add(lbl_UsuarioAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, -1, -1));
 
-        lblContraseñaAdmin.setText("Contraseña:");
+        lbl_ContraseñaAdmin.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_ContraseñaAdmin.setText("Contraseña:");
+        getContentPane().add(lbl_ContraseñaAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
 
-        btnEntrarAdmin.setText("Entrar");
-        btnEntrarAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+        txt_UsuarioAdmin.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        getContentPane().add(txt_UsuarioAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 300, -1));
+
+        PasswordAdmin.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        getContentPane().add(PasswordAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, 300, -1));
+
+        btn_EntrarAdmin.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_EntrarAdmin.setText("Entrar");
+        btn_EntrarAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEntrarAdminMouseClicked(evt);
+                btn_EntrarAdminMouseClicked(evt);
             }
         });
-
-        btnCancelarAdmin.setText("Cancelar");
-        btnCancelarAdmin.addActionListener(new java.awt.event.ActionListener() {
+        btn_EntrarAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarAdminActionPerformed(evt);
+                btn_EntrarAdminActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_EntrarAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, 160, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEntrarAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(btnCancelarAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(459, 459, 459)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblIniciarSesionAdmin)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblContraseñaAdmin)
-                        .addGap(18, 18, 18)
-                        .addComponent(PasswordAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lblUsuarioAdmin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtUsuarioAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(586, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(lblIniciarSesionAdmin)
-                .addGap(96, 96, 96)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsuarioAdmin)
-                    .addComponent(txtUsuarioAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(86, 86, 86)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PasswordAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblContraseñaAdmin))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCancelarAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                    .addComponent(btnEntrarAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(45, 45, 45))
-        );
+        btn_EntrarAdmin1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_EntrarAdmin1.setText("Cancelar");
+        btn_EntrarAdmin1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_EntrarAdmin1MouseClicked(evt);
+            }
+        });
+        btn_EntrarAdmin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EntrarAdmin1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_EntrarAdmin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 400, 160, 50));
+
+        img_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        getContentPane().add(img_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEntrarAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarAdminMouseClicked
-        String UsuarioAdmin="root";
-        String ContraseñaAdmin="12345";
+    private void btn_EntrarAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EntrarAdminMouseClicked
         
-        String PassAdmin=new String (PasswordAdmin.getPassword());
+        String Usuario = txt_UsuarioAdmin.getText();
+        String Contraseña = new String ( PasswordAdmin.getPassword() );
         
-        if(txtUsuarioAdmin.getText().equals(UsuarioAdmin)&& PassAdmin.equals(ContraseñaAdmin)){
+        try{
             
-            RegistrarUsuario RU = new RegistrarUsuario();
+            ControladorConec.getConec().establecerConexion(Usuario, Contraseña);
+            Statement s = ControladorConec.getConec().getConexion().createStatement();
+            s.execute( "use Veterinaria;" );//falta validar si existe la bases de datos
+            //Ventana GestionNominaPciGerente GN = new
+            RegistrarUsuario regUs = new RegistrarUsuario();
             //ventana visible
-            RU.setVisible(true);
+            regUs.setVisible(true);
             dispose();
-                    
-        }else{
-            JOptionPane.showMessageDialog(this,"Usuario / Contraseña incorrecta");
+        }catch(SQLException e){
             
+            JOptionPane.showMessageDialog(this,"Usuario / Contraseña incorrecta");
+        }
+        catch( ClassNotFoundException e){
+            e.printStackTrace();
         }
         
         
-    }//GEN-LAST:event_btnEntrarAdminMouseClicked
+    }//GEN-LAST:event_btn_EntrarAdminMouseClicked
 
-    private void btnCancelarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarAdminActionPerformed
-        Inicio In = new Inicio();
-        In.setVisible(true);
+    private void btn_EntrarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarAdminActionPerformed
+
+    private void btn_EntrarAdmin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EntrarAdmin1MouseClicked
+        Inicio ini = new Inicio();
+        ini.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnCancelarAdminActionPerformed
+    }//GEN-LAST:event_btn_EntrarAdmin1MouseClicked
+
+    private void btn_EntrarAdmin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarAdmin1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarAdmin1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,11 +171,12 @@ public class IniciarSesionAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField PasswordAdmin;
-    private javax.swing.JButton btnCancelarAdmin;
-    private javax.swing.JButton btnEntrarAdmin;
-    private javax.swing.JLabel lblContraseñaAdmin;
-    private javax.swing.JLabel lblIniciarSesionAdmin;
-    private javax.swing.JLabel lblUsuarioAdmin;
-    private javax.swing.JTextField txtUsuarioAdmin;
+    private javax.swing.JButton btn_EntrarAdmin;
+    private javax.swing.JButton btn_EntrarAdmin1;
+    private javax.swing.JLabel img_Logo;
+    private javax.swing.JLabel lbl_ContraseñaAdmin;
+    private javax.swing.JLabel lbl_IniciarSesionAdmin;
+    private javax.swing.JLabel lbl_UsuarioAdmin;
+    private javax.swing.JTextField txt_UsuarioAdmin;
     // End of variables declaration//GEN-END:variables
 }

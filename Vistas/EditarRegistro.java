@@ -5,19 +5,112 @@
  */
 
 package Vistas;
+import Modelos.*;
+import Controladores.*;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author miguelhernandez
+ * @author Alex
  */
 public class EditarRegistro extends javax.swing.JFrame {
+    
+    Propietario propietario;
+    Ctrl_EditarRegistro control;
+    DefaultTableModel modelovacu;
+    DefaultTableModel modeloconsul;
+    int renglonmodificado;
+    int numconsultas[];
 
     /**
      * Creates new form EditarRegistro
      */
     public EditarRegistro() {
         initComponents();
+        //String cabeceravacu[] =  {"Vacuna", "Fecha", "Lote", "Laboratorio" };
+        //String cabeceraconsul[] = { "Diagnostico", "Fecha de Diagnostico", "Tratamiento"};
+        //String datos[][]={};
+        //modelovacu = new DefaultTableModel(datos,cabeceravacu);
+        //modeloconsul = new DefaultTableModel(datos,cabeceraconsul);
+        //cargarDatosDefecto();
     }
+    
+     public EditarRegistro( Propietario propietario) {
+        initComponents();
+        control.setPropietario(propietario);
+        //String cabeceravacu[] =  {"Vacuna", "Fecha", "Lote", "Laboratorio" };
+        //String cabeceraconsul[] = { "Diagnostico", "Fecha de Diagnostico", "Tratamiento"};
+        //String datos[][]={};
+        //modelovacu = new DefaultTableModel(datos,cabeceravacu);
+        //modeloconsul = new DefaultTableModel(datos,cabeceraconsul);
+        modelovacu = (DefaultTableModel) this.tbl_Vacunas.getModel();
+        modeloconsul = (DefaultTableModel) this.tbl_Consultas.getModel();
+        renglonmodificado = 0;
+        cargarDatosDefecto();
+    }
+     
+    /**
+     * Carga los datos contenidos en propietario
+     */
+    private void cargarDatosDefecto()
+    {
+        Object datos[];
+        
+        txt_Nombre.setText( control.getPropietario().getMascota().getNombre() );
+        txt_Raza.setText( control.getPropietario().getMascota().getRaza() );
+        txt_Sexo.setText( control.getPropietario().getMascota().getSexo() );
+        txt_Color.setText( control.getPropietario().getMascota().getColor() );
+        txt_senParticulares.setText( control.getPropietario().getMascota().getSeñasParticulares());
+        
+        datos = new Object[3];
+        
+        while(control.getPropietario().getMascota().getIteradorConsultas().hasNext())
+        {
+            Consultas aux;
+            aux = control.getPropietario().getMascota().getIteradorConsultas().next();
+            datos[0] = aux.getDiagnostico();
+            datos[1] = aux.getFecha_Diagnostico();
+            datos[2] = aux.getTratamiento();
+            
+            modeloconsul.addRow(datos);
+        }
+        
+        //introduce una linea vacia
+        datos[0] = "";
+        datos[1] = "";
+        datos[2] = "";
+            
+        modeloconsul.addRow(datos);
+        
+        datos = new Object[4];
+        
+        while(control.getPropietario().getMascota().getIteradorVacunas().hasNext())
+        {
+            Vacuna aux;
+            aux = propietario.getMascota().getIteradorVacunas().next();
+            datos[0] = aux.getVacuna();
+            datos[1] = aux.getFechaAplicacion();
+            datos[2] = aux.getLote();
+            datos[3] = aux.getLaboratorio();
+            modelovacu.addRow(datos);
+        }
+        
+        datos[0] = "";
+        datos[1] = "";
+        datos[2] = "";
+        datos[3] = "";
+        modelovacu.addRow(datos);
+            
+        modeloconsul.addRow(datos);
+        
+        numconsultas = new int [control.getPropietario().getMascota().getListaConsultas().size()];
+        for(int i = 0; i < control.getPropietario().getMascota().getListaConsultas().size(); i++)
+        {
+            numconsultas[i] = -2;
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,116 +121,347 @@ public class EditarRegistro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        tbl_ResultadosPaciente = new javax.swing.JLabel();
+        lbl_Encabezado = new javax.swing.JLabel();
+        lbl_Cliente = new javax.swing.JLabel();
+        lbl_Paciente = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
+        tbl_Cliente = new javax.swing.JTable();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        tab_General = new javax.swing.JPanel();
+        lbl_Nombre = new javax.swing.JLabel();
+        lbl_Nombre1 = new javax.swing.JLabel();
+        lbl_Nombre2 = new javax.swing.JLabel();
+        lbl_Nombre3 = new javax.swing.JLabel();
+        lbl_Nombre4 = new javax.swing.JLabel();
+        txt_Nombre = new javax.swing.JTextField();
+        txt_Sexo = new javax.swing.JTextField();
+        txt_senParticulares = new javax.swing.JTextField();
+        txt_Raza = new javax.swing.JTextField();
+        txt_Color = new javax.swing.JTextField();
+        tab_Vacunas = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_Vacunas = new javax.swing.JTable();
+        tab_Consultas = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbl_Consultas = new javax.swing.JTable();
+        btn_guardarCambios = new javax.swing.JButton();
+        btn_Cancelar = new javax.swing.JButton();
+        img_Logo = new javax.swing.JLabel();
+
+        tbl_ResultadosPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Editar registro");
+        lbl_Encabezado.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_Encabezado.setText("Editar Registro");
+        getContentPane().add(lbl_Encabezado, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
 
-        jLabel2.setText("Propietario:");
+        lbl_Cliente.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Cliente.setText("Cliente");
+        getContentPane().add(lbl_Cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        lbl_Paciente.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Paciente.setText("Paciente");
+        getContentPane().add(lbl_Paciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        jScrollPane1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        tbl_Cliente.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tbl_Cliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Nombre", "Apellido paterno", "Apellido materno", "Dirección", "Telefóno"
+                "Nombre", "Apellido Pat.", "Apellido Mat.", "Calle", "Número", "Teléfono"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl_Cliente);
 
-        jLabel3.setText("Paciente:");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 730, 50));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1177, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 241, Short.MAX_VALUE)
-        );
+        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jTabbedPane1.addTab("General", jPanel1);
+        tab_General.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1177, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 241, Short.MAX_VALUE)
-        );
+        lbl_Nombre.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbl_Nombre.setText("Nombre:");
+        tab_General.add(lbl_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jTabbedPane1.addTab("Vacunas", jPanel2);
+        lbl_Nombre1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbl_Nombre1.setText("Raza:");
+        tab_General.add(lbl_Nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1177, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 241, Short.MAX_VALUE)
-        );
+        lbl_Nombre2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbl_Nombre2.setText("Sexo:");
+        tab_General.add(lbl_Nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
-        jTabbedPane1.addTab("Consultas", jPanel3);
+        lbl_Nombre3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbl_Nombre3.setText("Color:");
+        tab_General.add(lbl_Nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel1)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel2)
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel3)
-                .addGap(30, 30, 30)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
-        );
+        lbl_Nombre4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbl_Nombre4.setText("Señas Particulares:");
+        tab_General.add(lbl_Nombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+
+        txt_Nombre.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txt_Nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_NombreActionPerformed(evt);
+            }
+        });
+        tab_General.add(txt_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 269, 30));
+
+        txt_Sexo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txt_Sexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_SexoActionPerformed(evt);
+            }
+        });
+        tab_General.add(txt_Sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 269, 30));
+
+        txt_senParticulares.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txt_senParticulares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_senParticularesActionPerformed(evt);
+            }
+        });
+        tab_General.add(txt_senParticulares, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 269, 30));
+
+        txt_Raza.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txt_Raza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_RazaActionPerformed(evt);
+            }
+        });
+        tab_General.add(txt_Raza, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 269, 30));
+
+        txt_Color.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txt_Color.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ColorActionPerformed(evt);
+            }
+        });
+        tab_General.add(txt_Color, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 269, 30));
+
+        jTabbedPane1.addTab("General", tab_General);
+
+        tab_Vacunas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbl_Vacunas.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tbl_Vacunas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Vacuna", "Fecha", "Lote", "Laboratorio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tbl_Vacunas);
+
+        tab_Vacunas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 670, 260));
+
+        jTabbedPane1.addTab("Vacunas", tab_Vacunas);
+
+        tab_Consultas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbl_Consultas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Diagnóstico", "Fecha De Diagnóstico", "Tratamiento"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tbl_Consultas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_ConsultasMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tbl_Consultas);
+
+        tab_Consultas.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 670, 260));
+
+        jTabbedPane1.addTab("Consultas", tab_Consultas);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 730, 340));
+
+        btn_guardarCambios.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_guardarCambios.setText("Guardar Cambios");
+        btn_guardarCambios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_guardarCambiosMouseClicked(evt);
+            }
+        });
+        btn_guardarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarCambiosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_guardarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 570, 170, 40));
+
+        btn_Cancelar.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_Cancelar.setText("Cancelar");
+        btn_Cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_CancelarMouseClicked(evt);
+            }
+        });
+        btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 570, 160, 40));
+
+        img_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        getContentPane().add(img_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txt_NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_NombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_NombreActionPerformed
+
+    private void txt_SexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SexoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_SexoActionPerformed
+
+    private void txt_senParticularesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_senParticularesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_senParticularesActionPerformed
+
+    private void txt_RazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_RazaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_RazaActionPerformed
+
+    private void txt_ColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ColorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ColorActionPerformed
+
+    private void btn_guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarCambiosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_guardarCambiosActionPerformed
+
+    private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_CancelarActionPerformed
+
+    private void btn_guardarCambiosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_guardarCambiosMouseClicked
+        
+        String general[] = new String[5];
+        String propietario[] = new String[6];
+        String vacunas[][] = new String[modelovacu.getRowCount()][modelovacu.getColumnCount()];// cambiar
+        String consultas[][] = new String[modelovacu.getRowCount()][modelovacu.getColumnCount()];// cambiar
+        
+        propietario[0] = tbl_Cliente.getValueAt(0, 0).toString();
+        propietario[1] = tbl_Cliente.getValueAt(0, 1).toString();
+        propietario[2] = tbl_Cliente.getValueAt(0, 2).toString();
+        propietario[3] = tbl_Cliente.getValueAt(0, 3).toString();
+        propietario[4] = tbl_Cliente.getValueAt(0, 4).toString();
+        
+        general[0] = txt_Nombre.getText();
+        general[1] = txt_Raza.getText();
+        general[2] = txt_Sexo.getText();
+        general[3] = txt_Color.getText();
+        general[4] = txt_senParticulares.getText();
+        
+        for(int i = 0; i < modeloconsul.getRowCount(); i++)
+        {
+            for(int j = 0; j < modeloconsul.getColumnCount(); j++)
+            {
+                vacunas[i][j] = (String)this.tbl_Consultas.getValueAt(i, j);
+            }
+            
+        }
+        
+        for(int i = 0; i < modelovacu.getRowCount(); i++)
+        {
+            for(int j = 0; j < modelovacu.getColumnCount(); j++)
+            {
+                vacunas[i][j] = (String)this.tbl_Vacunas.getValueAt( i, j );
+            }
+            
+        }
+        try{
+            
+            control.actualizaRegistro(propietario, general, consultas, vacunas);
+            
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        
+        
+        /*int indicelista;
+        Consultas aux;
+        
+        for(int i = 0; i < numconsultas.length; i++)
+        {
+            
+            if(numconsultas[i] > -1)
+            {
+                String diagnostico = (String)this.tbl_Consultas.getValueAt(numconsultas[i], 0);
+                String fecha = (String) this.tbl_Consultas.getValueAt(numconsultas[i], 1);
+                String tratamiento = (String)this.tbl_Consultas.getValueAt(numconsultas[i], 2);
+                
+                indicelista = propietario.getMascota().buscarEnListConsultas( diagnostico,
+                       fecha, tratamiento,numconsultas[i]);
+                
+                aux = propietario.getMascota().getListaConsultas().get(indicelista);
+                aux.setDiagnostico(diagnostico);
+                aux.setFecha_Diagnostico(fecha);
+                aux.getTratamiento();
+                
+                
+            }
+        }*/
+    }//GEN-LAST:event_btn_guardarCambiosMouseClicked
+
+    private void tbl_ConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ConsultasMouseClicked
+        
+        if(evt.getClickCount() == 2 & numconsultas[renglonmodificado-1] != tbl_Consultas.getEditingRow())//revisar
+        {
+            
+            numconsultas[renglonmodificado] = tbl_Consultas.getEditingRow();
+            renglonmodificado++;///revisar esto
+            
+        }
+    }//GEN-LAST:event_tbl_ConsultasMouseClicked
+
+    private void btn_CancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CancelarMouseClicked
+        Busqueda bus = new Busqueda();
+        bus.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_CancelarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -175,14 +499,32 @@ public class EditarRegistro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton btn_Cancelar;
+    private javax.swing.JButton btn_guardarCambios;
+    private javax.swing.JLabel img_Logo;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbl_Cliente;
+    private javax.swing.JLabel lbl_Encabezado;
+    private javax.swing.JLabel lbl_Nombre;
+    private javax.swing.JLabel lbl_Nombre1;
+    private javax.swing.JLabel lbl_Nombre2;
+    private javax.swing.JLabel lbl_Nombre3;
+    private javax.swing.JLabel lbl_Nombre4;
+    private javax.swing.JLabel lbl_Paciente;
+    private javax.swing.JPanel tab_Consultas;
+    private javax.swing.JPanel tab_General;
+    private javax.swing.JPanel tab_Vacunas;
+    private javax.swing.JTable tbl_Cliente;
+    private javax.swing.JTable tbl_Consultas;
+    private javax.swing.JLabel tbl_ResultadosPaciente;
+    private javax.swing.JTable tbl_Vacunas;
+    private javax.swing.JTextField txt_Color;
+    private javax.swing.JTextField txt_Nombre;
+    private javax.swing.JTextField txt_Raza;
+    private javax.swing.JTextField txt_Sexo;
+    private javax.swing.JTextField txt_senParticulares;
     // End of variables declaration//GEN-END:variables
 }

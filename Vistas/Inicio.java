@@ -13,6 +13,13 @@ public class Inicio extends javax.swing.JFrame {
     public Inicio() {
         setTitle("Bienvenido Veterinaria " + nombreVeterinaria);
         initComponents();
+        this.getContentPane().setBackground(new java.awt.Color (224,255,255));
+        
+        
+        
+        
+        
+
     }
 
     /**
@@ -24,77 +31,60 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Bienvenido = new javax.swing.JLabel();
-        registraUsuario = new javax.swing.JButton();
-        iniciarSesion = new javax.swing.JButton();
+        lbl_Bienvenido = new javax.swing.JLabel();
+        btn_registraUsuario = new javax.swing.JButton();
+        btn_iniciarSesion = new javax.swing.JButton();
+        img_Logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Bienvenido.setFont(new java.awt.Font("Lucida Grande", 0, 48)); // NOI18N
-        Bienvenido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Bienvenido.setText("Bienvenido");
+        lbl_Bienvenido.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_Bienvenido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Bienvenido.setText("Sistema De Gestión Veterinaria");
+        getContentPane().add(lbl_Bienvenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 710, 70));
 
-        registraUsuario.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        registraUsuario.setText("Registrar usuario");
-        registraUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_registraUsuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_registraUsuario.setText("Registrar usuario");
+        btn_registraUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registraUsuarioMouseClicked(evt);
+                btn_registraUsuarioMouseClicked(evt);
             }
         });
+        getContentPane().add(btn_registraUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 227, 90));
 
-        iniciarSesion.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        iniciarSesion.setText("Iniciar sesión");
-        iniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_iniciarSesion.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_iniciarSesion.setText("Iniciar sesión");
+        btn_iniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                iniciarSesionMouseClicked(evt);
+                btn_iniciarSesionMouseClicked(evt);
             }
         });
+        getContentPane().add(btn_iniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, 230, 90));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(400, 400, 400)
-                        .addComponent(Bienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(505, 505, 505)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(registraUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(454, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(Bienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(registraUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117)
-                .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
-        );
+        img_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        getContentPane().add(img_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void iniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarSesionMouseClicked
+    private void btn_iniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iniciarSesionMouseClicked
         
         IniciarSesion IS = new IniciarSesion();
         IS.setVisible(true);
         dispose();
         
-    }//GEN-LAST:event_iniciarSesionMouseClicked
+    }//GEN-LAST:event_btn_iniciarSesionMouseClicked
 
-    private void registraUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registraUsuarioMouseClicked
+    private void btn_registraUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_registraUsuarioMouseClicked
         IniciarSesionAdmin IniS = new IniciarSesionAdmin();
         IniS.setVisible(true);
         dispose();
-    }//GEN-LAST:event_registraUsuarioMouseClicked
+    }//GEN-LAST:event_btn_registraUsuarioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -132,8 +122,9 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Bienvenido;
-    private javax.swing.JButton iniciarSesion;
-    private javax.swing.JButton registraUsuario;
+    private javax.swing.JButton btn_iniciarSesion;
+    private javax.swing.JButton btn_registraUsuario;
+    private javax.swing.JLabel img_Logo;
+    private javax.swing.JLabel lbl_Bienvenido;
     // End of variables declaration//GEN-END:variables
 }

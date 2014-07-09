@@ -6,6 +6,11 @@
 
 package Vistas;
 
+import Controladores.ControladorConec;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author miguelhernandez
@@ -17,6 +22,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
      */
     public RegistrarUsuario() {
         initComponents();
+        this.getContentPane().setBackground(new java.awt.Color (224,255,255));
+        
     }
 
     /**
@@ -28,83 +35,67 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblRegistrarUsuario = new javax.swing.JLabel();
-        lblNombreUsuario = new javax.swing.JLabel();
-        txtNombreUsuario = new javax.swing.JTextField();
-        lblContraseñaUsuario = new javax.swing.JLabel();
+        lbl_RegistrarUsuario = new javax.swing.JLabel();
+        lbl_NombreUsuario = new javax.swing.JLabel();
+        lbl_ContraseñaUsuario = new javax.swing.JLabel();
+        lbl_ContraseñaUsuario2 = new javax.swing.JLabel();
+        txt_NombreUsuario = new javax.swing.JTextField();
         PasswordUsuario1 = new javax.swing.JPasswordField();
-        lblContraseñaUsuario2 = new javax.swing.JLabel();
         PasswordUsuario2 = new javax.swing.JPasswordField();
-        btnGuardarUsuario = new javax.swing.JButton();
+        btn_GuardarUsuario = new javax.swing.JButton();
         btnCancelarRegistroUsuario = new javax.swing.JButton();
+        img_Logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblRegistrarUsuario.setText("Registrar usuario:");
+        lbl_RegistrarUsuario.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_RegistrarUsuario.setText("Registrar usuario:");
+        getContentPane().add(lbl_RegistrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, 40));
 
-        lblNombreUsuario.setText("Nombre de usuario:");
+        lbl_NombreUsuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_NombreUsuario.setText("Nombre de usuario:");
+        getContentPane().add(lbl_NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, 50));
 
-        lblContraseñaUsuario.setText("Contraseña:");
+        lbl_ContraseñaUsuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_ContraseñaUsuario.setText("Contraseña:");
+        getContentPane().add(lbl_ContraseñaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, -1, 50));
 
-        lblContraseñaUsuario2.setText("Escriba la contraseña nuevamente:");
+        lbl_ContraseñaUsuario2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_ContraseñaUsuario2.setText("Confirma tu contraseña:");
+        getContentPane().add(lbl_ContraseñaUsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, 50));
 
-        btnGuardarUsuario.setText("Guardar");
+        txt_NombreUsuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        getContentPane().add(txt_NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 410, -1));
 
+        PasswordUsuario1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        getContentPane().add(PasswordUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 410, -1));
+
+        PasswordUsuario2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        getContentPane().add(PasswordUsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, 410, -1));
+
+        btn_GuardarUsuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_GuardarUsuario.setText("Guardar");
+        btn_GuardarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_GuardarUsuarioMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_GuardarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 170, 50));
+
+        btnCancelarRegistroUsuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         btnCancelarRegistroUsuario.setText("Cancelar");
         btnCancelarRegistroUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCancelarRegistroUsuarioMouseClicked(evt);
             }
         });
+        getContentPane().add(btnCancelarRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 420, 170, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGuardarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
-                .addComponent(btnCancelarRegistroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(440, 440, 440)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblContraseñaUsuario)
-                    .addComponent(lblRegistrarUsuario)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNombreUsuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblContraseñaUsuario2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(PasswordUsuario2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                        .addComponent(PasswordUsuario1, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(530, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(lblRegistrarUsuario)
-                .addGap(95, 95, 95)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombreUsuario)
-                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addComponent(lblContraseñaUsuario)
-                .addGap(18, 18, 18)
-                .addComponent(PasswordUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(lblContraseñaUsuario2)
-                .addGap(18, 18, 18)
-                .addComponent(PasswordUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelarRegistroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
-        );
+        img_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        getContentPane().add(img_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -114,6 +105,39 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         In.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarRegistroUsuarioMouseClicked
+
+    private void btn_GuardarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_GuardarUsuarioMouseClicked
+        String usuario = txt_NombreUsuario.getText();
+        String contraseña1 = new String( PasswordUsuario1.getPassword() );
+        String contraseña2 = new String( PasswordUsuario2.getPassword() );
+        
+        try
+        {
+            if( contraseña1.equals(contraseña2) )
+            {
+                String sql;
+                sql = "grant select,insert,update,delete,create,drop"
+                    + " on Veterinaria. *"
+                    + " to '" + usuario + "'@'localhost'" 
+                    + "identified by '"+ contraseña1 +"';";
+                
+                Statement s = ControladorConec.getConec().getConexion().createStatement();
+                s.execute( "use Veterinaria;" );
+                s.execute( sql );
+                ControladorConec.getConec().desconectar();
+                
+                Inicio In = new Inicio();
+                In.setVisible(true);
+                dispose();
+                
+            }else{
+               
+                JOptionPane.showMessageDialog(this," Las contraseñas no coinciden ");
+            }
+        }catch( SQLException e ){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_GuardarUsuarioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -154,11 +178,12 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JPasswordField PasswordUsuario1;
     private javax.swing.JPasswordField PasswordUsuario2;
     private javax.swing.JButton btnCancelarRegistroUsuario;
-    private javax.swing.JButton btnGuardarUsuario;
-    private javax.swing.JLabel lblContraseñaUsuario;
-    private javax.swing.JLabel lblContraseñaUsuario2;
-    private javax.swing.JLabel lblNombreUsuario;
-    private javax.swing.JLabel lblRegistrarUsuario;
-    private javax.swing.JTextField txtNombreUsuario;
+    private javax.swing.JButton btn_GuardarUsuario;
+    private javax.swing.JLabel img_Logo;
+    private javax.swing.JLabel lbl_ContraseñaUsuario;
+    private javax.swing.JLabel lbl_ContraseñaUsuario2;
+    private javax.swing.JLabel lbl_NombreUsuario;
+    private javax.swing.JLabel lbl_RegistrarUsuario;
+    private javax.swing.JTextField txt_NombreUsuario;
     // End of variables declaration//GEN-END:variables
 }

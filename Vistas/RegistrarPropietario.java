@@ -1,5 +1,11 @@
 package Vistas;
 
+import Controladores.Ctrl_RegistrarPropietario;
+import Modelos.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author miguelhernandez
@@ -11,6 +17,7 @@ public class RegistrarPropietario extends javax.swing.JFrame {
      */
     public RegistrarPropietario() {
         initComponents();
+        this.getContentPane().setBackground(new java.awt.Color (224,255,255));
     }
 
     /**
@@ -22,135 +29,147 @@ public class RegistrarPropietario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblRegistrarPropietario = new javax.swing.JLabel();
-        lblNombrePropietario = new javax.swing.JLabel();
-        lblApellidoPaterno = new javax.swing.JLabel();
-        lblApellidoMaterno = new javax.swing.JLabel();
-        txtNombrePropietario = new javax.swing.JTextField();
-        txtApellidoPaterno = new javax.swing.JTextField();
-        txtApellidoMaterno = new javax.swing.JTextField();
-        lblDireccion = new javax.swing.JLabel();
-        txtDireccion = new javax.swing.JTextField();
-        lblTelefono = new javax.swing.JLabel();
-        txtTelefono = new javax.swing.JTextField();
-        btnGuardarPropietario = new javax.swing.JButton();
+        lbl_RegistrarPropietario = new javax.swing.JLabel();
+        lbl_NombrePropietario = new javax.swing.JLabel();
+        lbl_ApellidoPaterno = new javax.swing.JLabel();
+        lbl_ApellidoMaterno = new javax.swing.JLabel();
+        lbl_Numero = new javax.swing.JLabel();
+        lbl_Telefono = new javax.swing.JLabel();
+        lbl_Direccion = new javax.swing.JLabel();
+        lbl_Calle = new javax.swing.JLabel();
+        txt_NombrePropietario = new javax.swing.JTextField();
+        txt_ApellidoPaterno = new javax.swing.JTextField();
+        txt_Numero = new javax.swing.JTextField();
+        txt_ApellidoMaterno = new javax.swing.JTextField();
+        txt_Calle = new javax.swing.JTextField();
+        txt_Telefono = new javax.swing.JTextField();
+        btn_GuardarPropietario = new javax.swing.JButton();
         btnCancelarRegistroPropietario = new javax.swing.JButton();
+        img_Logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblRegistrarPropietario.setText("Registrar propietario:");
+        lbl_RegistrarPropietario.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_RegistrarPropietario.setText("Registrar propietario:");
+        getContentPane().add(lbl_RegistrarPropietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, -1, -1));
 
-        lblNombrePropietario.setText("Nombre(s):");
+        lbl_NombrePropietario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_NombrePropietario.setText("Nombre(s):");
+        getContentPane().add(lbl_NombrePropietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
 
-        lblApellidoPaterno.setText("Apellido paterno:");
+        lbl_ApellidoPaterno.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_ApellidoPaterno.setText("Apellido paterno:");
+        getContentPane().add(lbl_ApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
-        lblApellidoMaterno.setText("Apellido materno:");
+        lbl_ApellidoMaterno.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_ApellidoMaterno.setText("Apellido materno:");
+        getContentPane().add(lbl_ApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
-        lblDireccion.setText("Dirección:");
+        lbl_Numero.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Numero.setText("Número:");
+        getContentPane().add(lbl_Numero, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, -1, -1));
 
-        lblTelefono.setText("Teléfono:");
+        lbl_Telefono.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Telefono.setText("Teléfono:");
+        getContentPane().add(lbl_Telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, -1, -1));
 
-        btnGuardarPropietario.setText("Guardar");
-        btnGuardarPropietario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGuardarPropietarioMouseClicked(evt);
+        lbl_Direccion.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Direccion.setText("Dirección");
+        getContentPane().add(lbl_Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
+
+        lbl_Calle.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lbl_Calle.setText("Calle:");
+        getContentPane().add(lbl_Calle, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, -1, -1));
+
+        txt_NombrePropietario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        getContentPane().add(txt_NombrePropietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 460, -1));
+
+        txt_ApellidoPaterno.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        getContentPane().add(txt_ApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 460, -1));
+
+        txt_Numero.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        getContentPane().add(txt_Numero, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 70, -1));
+
+        txt_ApellidoMaterno.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txt_ApellidoMaterno.setToolTipText("");
+        txt_ApellidoMaterno.setMaximumSize(new java.awt.Dimension(6, 49));
+        txt_ApellidoMaterno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ApellidoMaternoActionPerformed(evt);
             }
         });
+        getContentPane().add(txt_ApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 460, 40));
 
+        txt_Calle.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        getContentPane().add(txt_Calle, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 460, -1));
+
+        txt_Telefono.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        getContentPane().add(txt_Telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 460, -1));
+
+        btn_GuardarPropietario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_GuardarPropietario.setText("Guardar");
+        btn_GuardarPropietario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_GuardarPropietarioMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_GuardarPropietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 460, 170, 50));
+
+        btnCancelarRegistroPropietario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         btnCancelarRegistroPropietario.setText("Cancelar");
         btnCancelarRegistroPropietario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCancelarRegistroPropietarioMouseClicked(evt);
             }
         });
+        getContentPane().add(btnCancelarRegistroPropietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, 170, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGuardarPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnCancelarRegistroPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(262, 262, 262))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(444, 444, 444)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblApellidoPaterno)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtApellidoPaterno))
-                    .addComponent(lblRegistrarPropietario)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNombrePropietario)
-                        .addGap(57, 57, 57)
-                        .addComponent(txtNombrePropietario))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblApellidoMaterno)
-                            .addComponent(lblDireccion)
-                            .addComponent(lblTelefono))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtApellidoMaterno)
-                            .addComponent(txtDireccion)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(616, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(lblRegistrarPropietario)
-                .addGap(115, 115, 115)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombrePropietario)
-                    .addComponent(txtNombrePropietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblApellidoPaterno)
-                    .addComponent(txtApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblApellidoMaterno)
-                    .addComponent(txtApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDireccion)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTelefono)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelarRegistroPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+        img_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        getContentPane().add(img_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardarPropietarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarPropietarioMouseClicked
+     
+       
+    }//GEN-LAST:event_btnGuardarPropietarioMouseClicked
+
     private void btnCancelarRegistroPropietarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarRegistroPropietarioMouseClicked
-        ElijeOpcion EO = new ElijeOpcion();
-        EO.setVisible(true);
+        EligeOpcion eo = new EligeOpcion();
+        eo.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarRegistroPropietarioMouseClicked
 
-    private void btnGuardarPropietarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarPropietarioMouseClicked
-        // Guardar Datos en BD
+    private void txt_ApellidoMaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ApellidoMaternoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ApellidoMaternoActionPerformed
+
+    private void btn_GuardarPropietarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_GuardarPropietarioMouseClicked
         
-        //Mostrar ventana registrar Paciente
-        RegistrarPaciente RP = new RegistrarPaciente();
-        RP.setVisible(true);
+        Propietario propietario=null;
+        Ctrl_RegistrarPropietario controlador;
+        controlador = new Ctrl_RegistrarPropietario();
+        try
+        {
+            propietario = controlador.creaPropietario( txt_NombrePropietario.getText(),
+                    txt_ApellidoPaterno.getText(), txt_ApellidoMaterno.getText(), txt_Telefono.getText(),
+                    txt_Calle.getText(), Integer.parseInt(txt_Numero.getText()));
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        
+        
+        RegistrarPaciente regpac = new RegistrarPaciente( propietario );
+        regpac.setVisible(true);
         dispose();
-        
-        
-        
-        
-    }//GEN-LAST:event_btnGuardarPropietarioMouseClicked
+    }//GEN-LAST:event_btn_GuardarPropietarioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -189,17 +208,21 @@ public class RegistrarPropietario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarRegistroPropietario;
-    private javax.swing.JButton btnGuardarPropietario;
-    private javax.swing.JLabel lblApellidoMaterno;
-    private javax.swing.JLabel lblApellidoPaterno;
-    private javax.swing.JLabel lblDireccion;
-    private javax.swing.JLabel lblNombrePropietario;
-    private javax.swing.JLabel lblRegistrarPropietario;
-    private javax.swing.JLabel lblTelefono;
-    private javax.swing.JTextField txtApellidoMaterno;
-    private javax.swing.JTextField txtApellidoPaterno;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtNombrePropietario;
-    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JButton btn_GuardarPropietario;
+    private javax.swing.JLabel img_Logo;
+    private javax.swing.JLabel lbl_ApellidoMaterno;
+    private javax.swing.JLabel lbl_ApellidoPaterno;
+    private javax.swing.JLabel lbl_Calle;
+    private javax.swing.JLabel lbl_Direccion;
+    private javax.swing.JLabel lbl_NombrePropietario;
+    private javax.swing.JLabel lbl_Numero;
+    private javax.swing.JLabel lbl_RegistrarPropietario;
+    private javax.swing.JLabel lbl_Telefono;
+    private javax.swing.JTextField txt_ApellidoMaterno;
+    private javax.swing.JTextField txt_ApellidoPaterno;
+    private javax.swing.JTextField txt_Calle;
+    private javax.swing.JTextField txt_NombrePropietario;
+    private javax.swing.JTextField txt_Numero;
+    private javax.swing.JTextField txt_Telefono;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,8 @@
 package Vistas;
 
+import Controladores.ControladorConec;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +16,8 @@ public class IniciarSesion extends javax.swing.JFrame {
      */
     public IniciarSesion() {
         initComponents();
+        this.getContentPane().setBackground(new java.awt.Color (224,255,255));
+           
     }
 
     /**
@@ -24,120 +29,130 @@ public class IniciarSesion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblUsuario = new javax.swing.JLabel();
-        lblContraseña = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        lbl_IniciarSesion = new javax.swing.JLabel();
+        lbl_Usuario = new javax.swing.JLabel();
+        lbl_Contraseña = new javax.swing.JLabel();
+        btn_Entrar = new javax.swing.JButton();
+        txt_Usuario = new javax.swing.JTextField();
         Password = new javax.swing.JPasswordField();
-        lblIniciarSesion = new javax.swing.JLabel();
-        btnEntrar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btn_Canselar = new javax.swing.JButton();
+        img_Logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblUsuario.setText("Usuario:");
+        lbl_IniciarSesion.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_IniciarSesion.setText("Iniciar Sesión");
+        getContentPane().add(lbl_IniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
-        lblContraseña.setText("Contraseña:");
+        lbl_Usuario.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_Usuario.setText("Usuario:");
+        getContentPane().add(lbl_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, 50));
 
-        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioActionPerformed(evt);
-            }
-        });
+        lbl_Contraseña.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        lbl_Contraseña.setText("Contraseña:");
+        getContentPane().add(lbl_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, 50));
 
-        lblIniciarSesion.setText("Iniciar sesión");
-
-        btnEntrar.setText("Entrar");
-        btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_Entrar.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_Entrar.setText("Entrar");
+        btn_Entrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEntrarMouseClicked(evt);
+                btn_EntrarMouseClicked(evt);
             }
         });
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btn_Entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btn_EntrarActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_Entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, 170, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(553, 553, 553)
-                .addComponent(lblIniciarSesion)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(468, 468, 468)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblContraseña)
-                    .addComponent(lblUsuario))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                    .addComponent(Password))
-                .addGap(483, 483, 483))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(lblIniciarSesion)
-                .addGap(166, 166, 166)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsuario)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblContraseña)
-                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55))
-        );
+        txt_Usuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txt_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_UsuarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txt_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 300, 50));
+
+        Password.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        Password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasswordActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 300, 50));
+
+        btn_Canselar.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        btn_Canselar.setText("Cancelar");
+        btn_Canselar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_CanselarMouseClicked(evt);
+            }
+        });
+        btn_Canselar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CanselarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Canselar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 170, 50));
+
+        img_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        getContentPane().add(img_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+    private void txt_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_UsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
+    }//GEN-LAST:event_txt_UsuarioActionPerformed
 
-    private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
+    private void btn_EntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EntrarMouseClicked
         
-        String Usuario="Admin";
-        String Contraseña="12345";
+        String Usuario = txt_Usuario.getText();
+        String Contraseña = new String (Password.getPassword());
         
-        String Pass=new String (Password.getPassword());
-        
-        if(txtUsuario.getText().equals(Usuario)&& Pass.equals(Contraseña)){
+        try{
             
+            ControladorConec.getConec().establecerConexion(Usuario, Contraseña);
+            Statement s = ControladorConec.getConec().getConexion().createStatement();
+            s.execute( "use Veterinaria;" );//falta validar si existe la bases de datos
             //Ventana GestionNominaPciGerente GN = new
-            ElijeOpcion ElijeO = new ElijeOpcion();
+            EligeOpcion ElijeO = new EligeOpcion();
             //ventana visible
             ElijeO.setVisible(true);
             dispose();
-                    
-        }else{
+        }catch(SQLException e){
+            
             JOptionPane.showMessageDialog(this,"Usuario / Contraseña incorrecta");
         }
+        catch( ClassNotFoundException e){
+            e.printStackTrace();
+        }
         
-    }//GEN-LAST:event_btnEntrarMouseClicked
+    }//GEN-LAST:event_btn_EntrarMouseClicked
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Inicio In = new Inicio();
-        In.setVisible(true);
+    private void btn_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EntrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EntrarActionPerformed
+
+    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PasswordActionPerformed
+
+    private void btn_CanselarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CanselarMouseClicked
+        Inicio ini = new Inicio();
+        ini.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }//GEN-LAST:event_btn_CanselarMouseClicked
+
+    private void btn_CanselarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CanselarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_CanselarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,11 +191,12 @@ public class IniciarSesion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField Password;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEntrar;
-    private javax.swing.JLabel lblContraseña;
-    private javax.swing.JLabel lblIniciarSesion;
-    private javax.swing.JLabel lblUsuario;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JButton btn_Canselar;
+    private javax.swing.JButton btn_Entrar;
+    private javax.swing.JLabel img_Logo;
+    private javax.swing.JLabel lbl_Contraseña;
+    private javax.swing.JLabel lbl_IniciarSesion;
+    private javax.swing.JLabel lbl_Usuario;
+    private javax.swing.JTextField txt_Usuario;
     // End of variables declaration//GEN-END:variables
 }
